@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PlatformService.Data;
 
@@ -10,7 +11,11 @@ services.AddDbContext<AppDbContext>(options =>
 {
     options.UseInMemoryDatabase("InMem");
 });
+services.AddScoped<IPlatformRepo, PlatformRepo>();
+
 services.AddControllers();
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
@@ -30,5 +35,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+PrepareDb.Population(app);
 
 app.Run();

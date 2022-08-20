@@ -2,10 +2,10 @@ using PlatformService.Models;
 
 namespace PlatformService.Data
 {
-    public class PlatformService : IPlatformService
+    public class PlatformRepo : IPlatformRepo
     {
         private readonly AppDbContext _context;
-        public PlatformService(AppDbContext context)
+        public PlatformRepo(AppDbContext context)
         {
             this._context = context;
         }
